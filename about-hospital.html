@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About HealthCare Plus Hospital - Our Story & Mission</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-header {
+            background: linear-gradient(135deg, #bdc8fa 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .about-header p {
+            font-size: 18px;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #667eea;
+        }
+
+        .mission-card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .mission-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .value-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .value-item h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .value-item p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .achievements-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 50px 0;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .achievement-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievement-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .achievement-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .achievement-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .department-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .department-card h4 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .department-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .team-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .team-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .team-stat h3 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .team-stat p {
+            font-size: 14px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .about-header h1 {
+                font-size: 28px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="container">
+        <a href="index.html" class="nav-link">← Back to Home</a>
+    </div>
+
+    <!-- Header -->
+    <div class="about-header">
+        <h1>About HealthCare Plus Hospital</h1>
+        <p>Your Partner in Health and Wellness</p>
+    </div>
+
+    <div class="container">
+        <!-- Mission & Vision -->
+        <section class="mission-vision">
+            <div class="mission-card">
+                <h2>🎯 Our Mission</h2>
+                <p>
+                    To provide accessible, affordable, and high-quality healthcare services to the community, 
+                    leveraging the latest medical technology and the expertise of our world-class medical professionals. 
+                    We are committed to treating every patient with compassion, dignity, and respect.
+                </p>
+            </div>
+
+            <div class="mission-card">
+                <h2>👁️ Our Vision</h2>
+                <p>
+                    To be a globally recognized healthcare institution known for clinical excellence, innovative medical 
+                    practices, and exceptional patient care. We envision a world where quality healthcare is accessible 
+                    to everyone.
+                </p>
+            </div>
+
+            <div class="mission-card">
+                <h2>💡 Our Philosophy</h2>
+                <p>
+                    We believe in patient-centered care where the well-being of our patients is at the heart of everything 
+                    we do. Our team works collaboratively to ensure the best outcomes for every patient who walks through 
+                    our doors.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section>
+            <h2 style="text-align: center; color: #667eea; font-size: 32px; margin-bottom: 30px;">Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <h3>🏥 Excellence</h3>
+                    <p>Commitment to the highest standards of medical care and continuous improvement</p>
+                </div>
+                <div class="value-item">
+                    <h3>❤️ Compassion</h3>
+                    <p>Caring for our patients with empathy, kindness, and respect</p>
+                </div>
+                <div class="value-item">
+                    <h3>🤝 Integrity</h3>
+                    <p>Acting with honesty, transparency, and ethical responsibility</p>
+                </div>
+                <div class="value-item">
+                    <h3>🔬 Innovation</h3>
+                    <p>Embracing new medical technologies and treatment methods</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Achievements -->
+        <section class="achievements-section">
+            <h2 style="text-align: center; color: #667eea; font-size: 32px; margin-bottom: 30px;">Our Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <div class="achievement-icon">🏆</div>
+                    <h4>National Accreditation</h4>
+                    <p>Accredited by the National Board of Accreditation for clinical excellence and patient care standards</p>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">⭐</div>
+                    <h4>5-Star Rating</h4>
+                    <p>Consistently rated 4.8-5.0 stars by patients for service quality and medical expertise</p>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">🏅</div>
+                    <h4>Multiple Awards</h4>
+                    <p>Recipient of numerous awards for clinical excellence and patient care innovation</p>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">📈</div>
+                    <h4>Growing Excellence</h4>
+                    <p>50,000+ successful treatments and growing patient satisfaction rate of 98%</p>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">🔬</div>
+                    <h4>Research & Development</h4>
+                    <p>Contributing to medical research and development of new treatment methodologies</p>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-icon">🌐</div>
+                    <h4>International Standards</h4>
+                    <p>Equipped with state-of-the-art facilities meeting international healthcare standards</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Departments -->
+        <section>
+            <h2 style="text-align: center; color: #667eea; font-size: 32px; margin-bottom: 30px;">Our Departments</h2>
+            <div class="departments-grid">
+                <div class="department-card">
+                    <h4>🫀 Cardiology</h4>
+                    <p>Comprehensive cardiac care including diagnostics, intervention, and rehabilitation services for heart diseases.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🧠 Neurology</h4>
+                    <p>Specialized treatment for neurological disorders including stroke, epilepsy, and brain conditions.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🦴 Orthopedics</h4>
+                    <p>Expert orthopedic surgery and treatment for bone, joint, and musculoskeletal conditions.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>👶 Pediatrics</h4>
+                    <p>Specialized medical care for infants, children, and adolescents with expertise in neonatal care.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>💆 Dermatology</h4>
+                    <p>Advanced dermatological treatments for skin, hair, and nail conditions with cosmetic services.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>⚕️ General Medicine</h4>
+                    <p>Comprehensive internal medicine and primary healthcare services for adult patients.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🏥 Emergency Medicine</h4>
+                    <p>24/7 emergency services with trauma care and acute medical management.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🔬 Diagnostic Services</h4>
+                    <p>Advanced laboratory testing, imaging (CT, MRI, X-ray) and diagnostic procedures.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>👨‍⚕️ Surgery</h4>
+                    <p>General and specialized surgical services with state-of-the-art operation theaters.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🦷 Dental</h4>
+                    <p>Comprehensive dental care including restorative, cosmetic, and preventive services.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>🧬 Oncology</h4>
+                    <p>Advanced cancer treatment including chemotherapy, radiation, and immunotherapy services.</p>
+                </div>
+
+                <div class="department-card">
+                    <h4>👩‍⚕️ Gynecology</h4>
+                    <p>Women's health services including obstetrics, gynecology, and reproductive medicine.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medical Team -->
+        <section class="team-section">
+            <h2>Our Medical Team</h2>
+            <p>
+                Our hospital is proud to have a team of 500+ highly skilled and dedicated medical professionals dedicated 
+                to your health and well-being. Each member of our team brings years of experience and expertise to provide 
+                you with the best possible care.
+            </p>
+
+            <div class="team-stats">
+                <div class="team-stat">
+                    <h3>500+</h3>
+                    <p>Medical Professionals</p>
+                </div>
+                <div class="team-stat">
+                    <h3>50,000+</h3>
+                    <p>Successful Treatments</p>
+                </div>
+                <div class="team-stat">
+                    <h3>30+</h3>
+                    <p>Years Combined Experience</p>
+                </div>
+                <div class="team-stat">
+                    <h3>98%</h3>
+                    <p>Patient Satisfaction</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commitment -->
+        <section style="background: #f8f9fa; padding: 40px; border-radius: 10px; margin: 50px 0;">
+            <h2 style="color: #667eea; text-align: center; margin-bottom: 20px;">Our Commitment to You</h2>
+            <p style="text-align: center; color: #666; line-height: 1.8; margin-bottom: 20px;">
+                At HealthCare Plus Hospital, we are committed to providing you with:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #67ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ Highest Quality Care</h4>
+                    <p style="color: #666; font-size: 14px;">Using latest medical technologies and best practices</p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ Compassionate Service</h4>
+                    <p style="color: #666; font-size: 14px;">Treating patients with respect, dignity, and empathy</p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ Affordable Pricing</h4>
+                    <p style="color: #666; font-size: 14px;">Accessible healthcare without compromising quality</p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ 24/7 Availability</h4>
+                    <p style="color: #666; font-size: 14px;">Round-the-clock emergency and healthcare services</p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ Transparency</h4>
+                    <p style="color: #666; font-size: 14px;">Clear communication and honest healthcare practices</p>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 3px solid #27ae60;">
+                    <h4 style="color: #667eea; margin-bottom: 10px;">✓ Continuous Innovation</h4>
+                    <p style="color: #666; font-size: 14px;">Adopting newest medical treatments and technologies</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; text-align: center; margin: 50px 0;">
+            <h2 style="margin-bottom: 20px;">Ready to Experience Excellence in Healthcare?</h2>
+            <p style="margin-bottom: 30px; font-size: 16px;">Book your appointment today or contact us for more information</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <a href="index.html#appointment-section" style="background: white; color: #667eea; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; transition: transform 0.3s;">
+                    Book Appointment
+                </a>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span>📞</span>
+                    <span>+91-9999999999</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span>📧</span>
+                    <span>info@healthcare-plus.com</span>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 30px 0; border-top: 1px solid #ddd; margin-top: 50px; color: #666;">
+            <p>&copy; 2026 HealthCare Plus Hospital. All rights reserved.</p>
+            <p style="font-size: 14px; margin-top: 10px;">
+                <a href="index.html" style="color: #667eea; text-decoration: none;">Home</a> | 
+                <a href="about-hospital.html" style="color: #667eea; text-decoration: none;">About Us</a> | 
+                <a href="doctors-profile.html" style="color: #667eea; text-decoration: none;">Our Doctors</a> | 
+                <a href="nearby-hospitals.html" style="color: #667eea; text-decoration: none;">Nearby Hospitals</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

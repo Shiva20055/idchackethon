@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare Plus Hospital - World Class Medical Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Homepage specific styles */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .about-section {
+            margin: 60px 0;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .hospital-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .history-section {
+            margin: 60px 0;
+            padding: 40px;
+        }
+
+        .history-timeline {
+            border-left: 4px solid #667eea;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .doctors-showcase {
+            margin: 60px 0;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .doctor-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 60px;
+        }
+
+        .doctor-info {
+            padding: 30px;
+        }
+
+        .doctor-info h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .doctor-specialty {
+            color: #EB5757;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .doctor-achievement {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+
+        .facilities-section {
+            margin: 60px 0;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .facility-item {
+            background: white;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .facility-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .facility-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .facility-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .testimonials-section {
+            margin: 60px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #27ae60;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .login-section {
+            margin: 80px 0;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .homepage-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            .hero-section p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .about-section,
+            .facilities-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>🏥 HealthCare Plus Hospital</h1>
+        <p>Excellence in Medical Care Since 1995</p>
+        <p style="font-size: 16px; opacity: 0.9;">Your Health is Our Priority. We Provide World-Class Medical Services</p>
+        <a href="#appointment-section" class="cta-button">Book an Appointment</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- About Hospital Section -->
+        <section class="about-section">
+            <h2 class="section-title">About HealthCare Plus Hospital</h2>
+            <p>
+                HealthCare Plus Hospital is a leading multi-specialty healthcare institution committed to delivering 
+                world-class medical services. With over 30 years of dedicated service to the community, we have established 
+                ourselves as a beacon of medical excellence and compassionate care.
+            </p>
+            <p>
+                Our state-of-the-art facilities, combined with our team of highly experienced and compassionate healthcare 
+                professionals, ensure that every patient receives the highest standard of care. We are equipped with the 
+                latest medical technology and infrastructure to provide comprehensive healthcare solutions.
+            </p>
+
+            <div class="hospital-stats">
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Expert Medical Professionals</p>
+                </div>
+                <div class="stat-card">
+                    <h3>50,000+</h3>
+                    <p>Successful Treatments</p>
+                </div>
+                <div class="stat-card">
+                    <h3>30+</h3>
+                    <p>Years of Service</p>
+                </div>
+                <div class="stat-card">
+                    <h3>98%</h3>
+                    <p>Patient Satisfaction</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hospital History Section -->
+        <section class="history-section">
+            <h2 class="section-title">Our Journey & Milestones</h2>
+            <div class="history-timeline">
+                <div class="timeline-item">
+                    <h4>📅 1995 - Foundation Year</h4>
+                    <p>
+                        HealthCare Plus Hospital was founded with a vision to provide accessible and affordable healthcare 
+                        to the community. We started with 50 beds and a dedicated team of 25 medical professionals.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 2000 - Major Expansion</h4>
+                    <p>
+                        We expanded our facilities and introduced cardiology and neurology departments. Our bed capacity 
+                        increased to 200, and we established ourselves as a multi-specialty hospital.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 2008 - Technology Integration</h4>
+                    <p>
+                        We adopted cutting-edge medical technology including CT scanners, MRI machines, and digital systems. 
+                        This marked our transformation into a modern healthcare facility.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 2015 - National Recognition</h4>
+                    <p>
+                        HealthCare Plus Hospital received national accreditation from the National Board of Accreditation. 
+                        We were recognized for our clinical excellence and patient care standards.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 2020 - Digital Healthcare Launch</h4>
+                    <p>
+                        We launched our telemedicine services and online appointment booking system during the pandemic, 
+                        ensuring uninterrupted healthcare delivery to our patients.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 2026 - Present Day</h4>
+                    <p>
+                        Today, we operate 12 specialized departments with over 500 expert doctors and staff. We continue 
+                        to innovate and provide exceptional healthcare services to thousands of satisfied patients.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facilities Section -->
+        <section class="facilities-section">
+            <h2 class="section-title">Our Facilities & Services</h2>
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <div class="facility-icon">🏥</div>
+                    <h4>Emergency Department</h4>
+                    <p>24/7 emergency care with dedicated trauma centers</p>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">🔬</div>
+                    <h4>Diagnostic Lab</h4>
+                    <p>Advanced laboratory with latest diagnostic equipment</p>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">🏥</div>
+                    <h4>Operation Theaters</h4>
+                    <p>5 fully equipped OTs with laminar air flow</p>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">🛏️</div>
+                    <h4>ICU Services</h4>
+                    <p>45-bed ICU with critical care equipment</p>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">📡</div>
+                    <h4>Advanced Imaging</h4>
+                    <p>CT, MRI, X-ray, and Ultrasound facilities</p>
+                </div>
+
+                <div class="facility-item">
+                    <div class="facility-icon">🏥</div>
+                    <h4>Pharmacy</h4>
+                    <p>Complete range of medications and prescriptions</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctors Showcase Section -->
+        <section class="doctors-showcase">
+            <h2 class="section-title">Our Distinguished Doctors</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;">
+                Meet our team of highly qualified and experienced medical professionals
+            </p>
+
+            <div class="doctors-grid">
+                <!-- Doctor 1 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Sandeep Verma</h3>
+                        <div class="doctor-specialty">Cardiology</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 15 years | <strong>Patients Treated:</strong> 5,000+
+                        </p>
+                        <p class="doctor-achievement">
+                            Chief Cardiologist with expertise in complex cardiac procedures and interventional cardiology.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Best Cardiologist Award 2023</span>
+                            <span class="achievement-badge">⭐ 4.9/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Neha Sharma</h3>
+                        <div class="doctor-specialty">Neurology</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 12 years | <strong>Patients Treated:</strong> 3,500+
+                        </p>
+                        <p class="doctor-achievement">
+                            Renowned Neurologist specializing in stroke management and epilepsy treatment.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Excellence in Neurology 2022</span>
+                            <span class="achievement-badge">⭐ 4.8/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Arun Singh</h3>
+                        <div class="doctor-specialty">Orthopedics</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 18 years | <strong>Surgeries Performed:</strong> 2,000+
+                        </p>
+                        <p class="doctor-achievement">
+                            Orthopedic surgeon with expertise in joint replacement and sports medicine.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Super Specialist 2024</span>
+                            <span class="achievement-badge">⭐ 4.9/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 4 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Anjali Gupta</h3>
+                        <div class="doctor-specialty">Pediatrics</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 10 years | <strong>Children Treated:</strong> 10,000+
+                        </p>
+                        <p class="doctor-achievement">
+                            Compassionate pediatrician specializing in child health and neonatal care.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Best Pediatrician 2023</span>
+                            <span class="achievement-badge">⭐ 4.9/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 5 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👨‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Rajiv Desai</h3>
+                        <div class="doctor-specialty">Dermatology</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 14 years | <strong>Treatments Provided:</strong> 8,000+
+                        </p>
+                        <p class="doctor-achievement">
+                            Expert dermatologist with international training in cosmetic and clinical dermatology.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Dermatology Excellence 2024</span>
+                            <span class="achievement-badge">⭐ 4.8/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 6 -->
+                <div class="doctor-card">
+                    <div class="doctor-avatar">👩‍⚕️</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Meera Reddy</h3>
+                        <div class="doctor-specialty">General Medicine</div>
+                        <p class="doctor-achievement">
+                            <strong>Experience:</strong> 16 years | <strong>Patients Consulted:</strong> 15,000+
+                        </p>
+                        <p class="doctor-achievement">
+                            Senior physician with expertise in chronic disease management and internal medicine.
+                        </p>
+                        <div>
+                            <span class="achievement-badge">🏆 Clinical Excellence 2023</span>
+                            <span class="achievement-badge">⭐ 4.9/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="doctors-profile.html" class="cta-button" style="background: #667eea; color: white;">View All Doctors & Profiles →</a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2 class="section-title">User Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Excellent medical care and very compassionate staff. Dr. Sandeep Verma saved my life with his 
+                        expertise. Highly recommended!"
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Rajesh Kumar, Patient</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The hospital facilities are world-class. The entire team made me feel comfortable and safe. 
+                        I recovered faster than expected."
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Priya Singh, Patient</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Dr. Anjali Gupta's care for my child was exceptional. The hospital staff was supportive and 
+                        professional throughout the treatment."
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Amit Patel, Patient Guardian</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The online appointment booking system is very convenient. The hospital is efficiently managed 
+                        and the treatment was successful."
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Neha Desai, Patient</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Outstanding medical team and excellent emergency response. I've never seen such dedication 
+                        from healthcare professionals."
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Viraj Joshi, Patient</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Best decision to come to HealthCare Plus Hospital. The doctors are highly skilled and the 
+                        hospital environment is welcoming."
+                    </div>
+                    <div class="testimonial-author">⭐⭐⭐⭐⭐ Anita Sharma, Patient</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nearby Hospitals Section -->
+        <section style="margin: 60px 0; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
+            <h2 style="font-size: 32px; margin-bottom: 15px;">🗺️ Track Nearby Government Hospitals</h2>
+            <p style="font-size: 16px; margin-bottom: 30px; opacity: 0.95;">
+                Find and explore nearby government healthcare facilities with our interactive hospital tracker. 
+                View hospital details, departments, contact information, and get directions.
+            </p>
+            <a href="nearby-hospitals.html" style="background: white; color: #667eea; padding: 15px 40px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; transition: transform 0.3s;">View Nearby Hospitals →</a>
+        </section>
+
+        <!-- Login Section -->
+        <section class="login-section" id="appointment-section">
+            <h2 class="section-title">Get Started Today</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 16px;">
+                Choose your role to access our online appointment booking system
+            </p>
+
+            <div class="login-options">
+                <div class="option-card">
+                    <div class="icon">👤</div>
+                    <h2>User Portal</h2>
+                    <p>Book appointments, manage health records, and connect with doctors</p>
+                    <a href="user-login.html" class="btn btn-primary">Login as Patient</a>
+                </div>
+
+                <div class="option-card">
+                    <div class="icon">👨‍⚕️</div>
+                    <h2>Doctor Portal</h2>
+                    <p>Manage schedule, appointments, and patient consultations</p>
+                    <a href="doctor-login.html" class="btn btn-primary">Login as Doctor</a>
+                </div>
+
+                <div class="option-card">
+                    <div class="icon">⚙️</div>
+                    <h2>Admin Portal</h2>
+                    <p>Manage hospital operations, doctors, and departments</p>
+                    <a href="admin-login.html" class="btn btn-primary">Login as Admin</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <div class="homepage-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>HealthCare Plus Hospital is a leading multi-specialty healthcare institution committed to delivering world-class medical services.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p>📞 Phone: +91-9999999999</p>
+                <p>📧 Email: info@healthcare-plus.com</p>
+                <p>📍 Address: 123 Medical Complex, Mumbai, India</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html" style="color: #667eea; text-decoration: none;">✓ Home</a></p>
+                <p><a href="about-hospital.html" style="color: #667eea; text-decoration: none;">✓ About Us</a></p>
+                <p><a href="doctors-profile.html" style="color: #667eea; text-decoration: none;">✓ Our Doctors</a></p>
+                <p><a href="nearby-hospitals.html" style="color: #667eea; text-decoration: none;">✓ Nearby Hospitals</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Office Hours</h4>
+                <p>Monday - Friday: 8:00 AM - 8:00 PM</p>
+                <p>Saturday: 9:00 AM - 6:00 PM</p>
+                <p>Sunday & Holidays: Emergency Only</p>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #555; margin: 20px 0;">
+        <p>&copy; 2026 HealthCare Plus Hospital. All rights reserved. | Privacy Policy | Terms & Conditions</p>
+    </div>
+</body>
+</html>

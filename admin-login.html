@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Hospital Appointment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>Admin Login</h1>
+                    <p>Hospital Management System</p>
+                </div>
+
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminEmail">Admin Email</label>
+                        <input type="email" id="adminEmail" name="email" required placeholder="Enter admin email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" name="password" required placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <div class="form-footer">
+                    <p><a href="index.html">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Validate form
+            const validation = validateAdminLogin(email, password);
+            if (!validation.valid) {
+                showErrorAlert('Login Error', validation.errors);
+                return;
+            }
+            
+            // Simple demo validation
+            if (email === 'admin@hospital.com' && password === 'admin123') {
+                // Store admin session
+                localStorage.setItem('adminEmail', email);
+                localStorage.setItem('adminRole', 'admin');
+                localStorage.setItem('adminName', 'Administrator');
+                
+                // Redirect to admin dashboard
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                alert('Invalid credentials. Demo: Email: admin@hospital.com, Password: admin123');
+            }
+        });
+    </script>
+</body>
+</html>

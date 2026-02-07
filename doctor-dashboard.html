@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - Hospital Appointment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <h1>🏥 Doctor Dashboard</h1>
+                <div class="navbar-right">
+                    <span id="doctorGreeting">Welcome, Doctor</span>
+                    <a href="#" onclick="logout()" class="btn btn-secondary">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="sidebar">
+                <button class="sidebar-btn active" onclick="showSection('my-schedule')">📅 My Schedule</button>
+                <button class="sidebar-btn" onclick="showSection('appointments')">📋 My Appointments</button>
+                <button class="sidebar-btn" onclick="showSection('availability')">⏰ Set Availability</button>
+                <button class="sidebar-btn" onclick="showSection('profile')">👤 My Profile</button>
+            </div>
+
+            <div class="main-content">
+                <!-- My Schedule Section -->
+                <div id="my-schedule" class="section active">
+                    <h2>My Schedule</h2>
+                    <div class="form-section">
+                        <label for="scheduleDate">Select Date:</label>
+                        <input type="date" id="scheduleDate" onchange="loadSchedule()">
+                    </div>
+                    <div id="scheduleContent" class="schedule-view">
+                        <!-- Schedule will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Appointments Section -->
+                <div id="appointments" class="section">
+                    <h2>My Appointments</h2>
+                    <div class="filters">
+                        <select id="appointmentFilter" onchange="filterAppointments()">
+                            <option value="">All Appointments</option>
+                            <option value="Today">Today</option>
+                            <option value="Upcoming">Upcoming</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                    <div id="appointmentsList" class="appointments-list">
+                        <p>No appointments found.</p>
+                    </div>
+                </div>
+
+                <!-- Set Availability Section -->
+                <div id="availability" class="section">
+                    <h2>Set Your Availability</h2>
+                    
+                    <div class="form-section">
+                        <h3>Working Hours</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startTime">Start Time</label>
+                                <input type="time" id="startTime" value="09:00">
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime">End Time</label>
+                                <input type="time" id="endTime" value="17:00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Break Time</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="breakStart">Break Start</label>
+                                <input type="time" id="breakStart" value="13:00">
+                            </div>
+                            <div class="form-group">
+                                <label for="breakEnd">Break End</label>
+                                <input type="time" id="breakEnd" value="14:00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Days Available</h3>
+                        <div class="days-checkbox">
+                            <label><input type="checkbox" value="Monday" checked> Monday</label>
+                            <label><input type="checkbox" value="Tuesday" checked> Tuesday</label>
+                            <label><input type="checkbox" value="Wednesday" checked> Wednesday</label>
+                            <label><input type="checkbox" value="Thursday" checked> Thursday</label>
+                            <label><input type="checkbox" value="Friday" checked> Friday</label>
+                            <label><input type="checkbox" value="Saturday"> Saturday</label>
+                            <label><input type="checkbox" value="Sunday"> Sunday</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveAvailability()">Save Availability</button>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile" class="section">
+                    <h2>My Profile</h2>
+                    <div class="profile-info">
+                        <p><strong>Name:</strong> <span id="profileName">Dr. Doctor Name</span></p>
+                        <p><strong>Email:</strong> <span id="profileEmail">doctor@email.com</span></p>
+                        <p><strong>Specialization:</strong> <span id="profileSpec">Specialization</span></p>
+                        <p><strong>Experience:</strong> <span id="profileExp">15 years</span></p>
+                        <p><strong>Phone:</strong> <span id="profilePhone">N/A</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(sectionName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function loadSchedule() {
+            const date = document.getElementById('scheduleDate').value;
+            const scheduleContent = document.getElementById('scheduleContent');
+
+            if (!date) {
+                scheduleContent.innerHTML = '<p>Please select a date</p>';
+                return;
+            }
+
+            const slots = [
+                { time: '09:00 AM', patient: 'Patient 1', status: 'Confirmed' },
+                { time: '09:30 AM', patient: 'Available', status: 'Free' },
+                { time: '10:00 AM', patient: 'Patient 2', status: 'Confirmed' },
+                { time: '10:30 AM', patient: 'Available', status: 'Free' },
+                { time: '02:00 PM', patient: 'Patient 3', status: 'Confirmed' },
+                { time: '02:30 PM', patient: 'Available', status: 'Free' },
+                { time: '03:00 PM', patient: 'Patient 4', status: 'Confirmed' }
+            ];
+
+            scheduleContent.innerHTML = `
+                <table class="schedule-table">
+                    <tr>
+                        <th>Time</th>
+                        <th>Patient</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    ${slots.map((slot, index) => `
+                        <tr>
+                            <td>${slot.time}</td>
+                            <td>${slot.patient}</td>
+                            <td><span class="status-badge ${slot.status.toLowerCase()}">${slot.status}</span></td>
+                            <td>
+                                ${slot.status === 'Confirmed' ? 
+                                    '<button class="btn btn-small" onclick="viewAppointment(' + index + ')">View</button>' : 
+                                    '<button class="btn btn-small" onclick="blockSlot(' + index + ')">Block</button>'}
+                            </td>
+                        </tr>
+                    `).join('')}
+                </table>
+            `;
+        }
+
+        function filterAppointments() {
+            const filter = document.getElementById('appointmentFilter').value;
+            loadDoctorAppointments(filter);
+        }
+
+        function loadDoctorAppointments(filter) {
+            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            const appointmentsList = document.getElementById('appointmentsList');
+
+            let filtered = appointments;
+            if (filter === 'Today') {
+                const today = new Date().toISOString().split('T')[0];
+                filtered = appointments.filter(apt => apt.date === today);
+            } else if (filter === 'Completed') {
+                filtered = appointments.filter(apt => apt.status === 'Completed');
+            } else if (filter === 'Upcoming') {
+                filtered = appointments.filter(apt => apt.status !== 'Completed');
+            }
+
+            if (filtered.length === 0) {
+                appointmentsList.innerHTML = '<p>No appointments found.</p>';
+                return;
+            }
+
+            appointmentsList.innerHTML = filtered.map((apt, index) => `
+                <div class="appointment-card">
+                    <h4>Appointment ${index + 1}</h4>
+                    <p><strong>Date:</strong> ${apt.date}</p>
+                    <p><strong>Time:</strong> ${apt.time}</p>
+                    <p><strong>Patient Concern:</strong> ${apt.symptoms}</p>
+                    <p><strong>Status:</strong> <span class="status-badge">${apt.status}</span></p>
+                    <div class="appointment-actions">
+                        <button class="btn btn-small" onclick="approveAppointment(${index})">Confirm</button>
+                        <button class="btn btn-small btn-danger" onclick="cancelAppointment(${index})">Cancel</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function approveAppointment(index) {
+            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            if (appointments[index]) {
+                appointments[index].status = 'Confirmed';
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                alert('Appointment confirmed!');
+                loadDoctorAppointments('');
+            }
+        }
+
+        function cancelAppointment(index) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+                appointments.splice(index, 1);
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                alert('Appointment cancelled!');
+                loadDoctorAppointments('');
+            }
+        }
+
+        function saveAvailability() {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const breakStart = document.getElementById('breakStart').value;
+            const breakEnd = document.getElementById('breakEnd').value;
+
+            const availability = {
+                startTime,
+                endTime,
+                breakStart,
+                breakEnd,
+                savedDate: new Date().toLocaleString()
+            };
+
+            localStorage.setItem('doctorAvailability', JSON.stringify(availability));
+            alert('Availability saved successfully!');
+        }
+
+        function logout() {
+            localStorage.removeItem('doctorEmail');
+            localStorage.removeItem('doctorRole');
+            localStorage.removeItem('doctorName');
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            const doctorName = localStorage.getItem('doctorName') || 'Doctor';
+            document.getElementById('doctorGreeting').textContent = `Welcome, ${doctorName}`;
+            document.getElementById('profileName').textContent = doctorName;
+            document.getElementById('profileEmail').textContent = localStorage.getItem('doctorEmail') || 'N/A';
+            document.getElementById('profileSpec').textContent = localStorage.getItem('doctorSpecialization') || 'N/A';
+            loadDoctorAppointments('');
+        });
+    </script>
+</body>
+</html>

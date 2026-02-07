@@ -1,0 +1,58 @@
+{
+  "name": "hospital-appointment-system",
+  "version": "1.0.0",
+  "description": "A comprehensive hospital appointment booking system with patient, doctor, and admin portals",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "seed": "node server/scripts/seedDatabase.js"
+  },
+  "keywords": [
+    "hospital",
+    "appointment",
+    "booking",
+    "healthcare",
+    "doctor",
+    "patient",
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "author": "Hospital System Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.0",
+    "joi": "^17.9.1",
+    "nodemailer": "^6.9.1",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.42.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/hospital-appointment-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/hospital-appointment-system/issues"
+  },
+  "homepage": "https://github.com/yourusername/hospital-appointment-system#readme"
+}

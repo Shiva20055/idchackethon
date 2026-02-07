@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login - Hospital Appointment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>Doctor Login</h1>
+                    <p>Manage your appointments and schedule</p>
+                </div>
+
+                <form id="doctorLoginForm">
+                    <div class="form-group">
+                        <label for="doctorEmail">Doctor Email</label>
+                        <input type="email" id="doctorEmail" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorPassword">Password</label>
+                        <input type="password" id="doctorPassword" name="password" required placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" onclick="toggleRegister(event)">Register here</a></p>
+                    <p><a href="index.html">Back to Home</a></p>
+                </div>
+            </div>
+
+            <div class="register-box" id="registerBox" style="display: none;">
+                <div class="login-header">
+                    <h1>Doctor Registration</h1>
+                    <p>Create your doctor account</p>
+                </div>
+
+                <form id="doctorRegisterForm">
+                    <div class="form-group">
+                        <label for="doctorName">Full Name</label>
+                        <input type="text" id="doctorName" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorRegEmail">Email Address</label>
+                        <input type="email" id="doctorRegEmail" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorSpecialization">Specialization</label>
+                        <select id="doctorSpecialization" name="specialization" required>
+                            <option value="">Select Specialization</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="General Medicine">General Medicine</option>
+                            <option value="Oncology">Oncology</option>
+                            <option value="Dental">Dental</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorPhone">Phone Number</label>
+                        <input type="tel" id="doctorPhone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorRegPassword">Password</label>
+                        <input type="password" id="doctorRegPassword" name="password" required placeholder="Create a password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+
+                <div class="form-footer">
+                    <p><a href="#" onclick="toggleRegister(event)">Back to Login</a></p>
+                    <p><a href="index.html">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleRegister(event) {
+            event.preventDefault();
+            document.querySelector('.login-box').style.display = 
+                document.querySelector('.login-box').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('registerBox').style.display = 
+                document.getElementById('registerBox').style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.getElementById('doctorLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('doctorEmail').value;
+            const password = document.getElementById('doctorPassword').value;
+            
+            // Validate form
+            const validation = validateDoctorLogin(email, password);
+            if (!validation.valid) {
+                showErrorAlert('Login Error', validation.errors);
+                return;
+            }
+            
+            // Store doctor session
+            localStorage.setItem('doctorEmail', email);
+            localStorage.setItem('doctorRole', 'doctor');
+            localStorage.setItem('doctorName', 'Dr. Doctor Name');
+            localStorage.setItem('doctorSpecialization', 'Cardiology');
+            
+            // Redirect to doctor dashboard
+            window.location.href = 'doctor-dashboard.html';
+        });
+
+        document.getElementById('doctorRegisterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('doctorName').value;
+            const email = document.getElementById('doctorRegEmail').value;
+            const specialization = document.getElementById('doctorSpecialization').value;
+            const phone = document.getElementById('doctorPhone').value;
+            const password = document.getElementById('doctorRegPassword').value;
+            
+            // Validate form
+            const validation = validateDoctorRegistration(name, email, specialization, phone, password);
+            if (!validation.valid) {
+                showErrorAlert('Registration Error', validation.errors);
+                return;
+            }
+            
+            // Store doctor data
+            localStorage.setItem('doctorEmail', email);
+            localStorage.setItem('doctorName', name);
+            localStorage.setItem('doctorSpecialization', specialization);
+            localStorage.setItem('doctorPhone', phone);
+            localStorage.setItem('doctorRole', 'doctor');
+            
+            alert('Registration successful! Logging in...');
+            window.location.href = 'doctor-dashboard.html';
+        });
+    </script>
+</body>
+</html>

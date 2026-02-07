@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Hospital Appointment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="navbar-content">
+                <h1>🏥 User Dashboard</h1>
+                <div class="navbar-right">
+                    <span id="userGreeting">Welcome, User</span>
+                    <a href="#" onclick="logout()" class="btn btn-secondary">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <div class="sidebar">
+                <button class="sidebar-btn active" onclick="showSection('book-appointment')">📅 Book Appointment</button>
+                <button class="sidebar-btn" onclick="showSection('my-appointments')">📋 My Appointments</button>
+                <button class="sidebar-btn" onclick="showSection('profile')">👤 My Profile</button>
+            </div>
+
+            <div class="main-content">
+                <!-- Book Appointment Section -->
+                <div id="book-appointment" class="section active">
+                    <h2>Book an Appointment</h2>
+                    
+                    <div class="form-section">
+                        <h3>Step 1: Select Department</h3>
+                        <div class="form-group">
+                            <label for="department">Choose Department</label>
+                            <select id="department" onchange="loadDoctors()">
+                                <option value="">Select a Department</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="General Medicine">General Medicine</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Dental">Dental</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Step 2: Select Doctor</h3>
+                        <div id="doctorsList" class="doctors-grid">
+                            <!-- Doctors will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Step 3: Choose Date & Time</h3>
+                        <div class="form-group">
+                            <label for="appointmentDate">Select Date</label>
+                            <input type="date" id="appointmentDate" onchange="loadAvailableSlots()">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Available Time Slots</label>
+                            <div id="timeSlots" class="time-slots">
+                                <!-- Time slots will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Step 4: Provide Details</h3>
+                        <form id="bookingForm">
+                            <div class="form-group">
+                                <label for="symptoms">Symptoms/Reason for Visit</label>
+                                <textarea id="symptoms" placeholder="Describe your symptoms or reason for visit" required></textarea>
+                            </div>
+
+                            <div class="payment-section">
+                                <h4>💳 Booking Fee</h4>
+                                <div class="payment-info">
+                                    <p><strong>Consultation Fee:</strong> <span class="price">₹100</span></p>
+                                    <p style="font-size: 0.9rem; color: #666;">This is a one-time booking fee for online consultation</p>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Confirm Appointment & Pay ₹100</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- My Appointments Section -->
+                <div id="my-appointments" class="section">
+                    <h2>My Appointments</h2>
+                    <div id="appointmentsList" class="appointments-list">
+                        <p>No appointments booked yet.</p>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile" class="section">
+                    <h2>My Profile</h2>
+                    <div class="profile-info">
+                        <p><strong>Name:</strong> <span id="profileName">Patient Name</span></p>
+                        <p><strong>Email:</strong> <span id="profileEmail">patient@email.com</span></p>
+                        <p><strong>Phone:</strong> <span id="profilePhone">N/A</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedDoctor = null;
+        let selectedDate = null;
+        let selectedTime = null;
+
+        const doctorsByDepartment = {
+            'Cardiology': [
+                { id: 1, name: 'Dr. Rajesh Kumar', qualification: 'MD, DM (Cardiology)', experience: '15 years' },
+                { id: 2, name: 'Dr. Priya Singh', qualification: 'MD, DM (Cardiology)', experience: '12 years' }
+            ],
+            'Neurology': [
+                { id: 3, name: 'Dr. Arun Patel', qualification: 'MD, DM (Neurology)', experience: '18 years' },
+                { id: 4, name: 'Dr. Neha Sharma', qualification: 'MD, DM (Neurology)', experience: '10 years' }
+            ],
+            'Orthopedics': [
+                { id: 5, name: 'Dr. Vikram Singh', qualification: 'MS (Orthopedics)', experience: '14 years' },
+                { id: 6, name: 'Dr. Anjali Gupta', qualification: 'MS (Orthopedics)', experience: '9 years' }
+            ],
+            'Pediatrics': [
+                { id: 7, name: 'Dr. Suresh Desai', qualification: 'MD (Pediatrics)', experience: '16 years' },
+                { id: 8, name: 'Dr. Divya Nair', qualification: 'MD (Pediatrics)', experience: '11 years' }
+            ],
+            'Dermatology': [
+                { id: 9, name: 'Dr. Ashok Khanna', qualification: 'MD (Dermatology)', experience: '13 years' },
+                { id: 10, name: 'Dr. Meera Joshi', qualification: 'MD (Dermatology)', experience: '8 years' }
+            ],
+            'General Medicine': [
+                { id: 11, name: 'Dr. Ramesh Iyer', qualification: 'MD (Medicine)', experience: '20 years' },
+                { id: 12, name: 'Dr. Sneha Reddy', qualification: 'MD (Medicine)', experience: '7 years' }
+            ]
+        };
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function loadDoctors() {
+            const department = document.getElementById('department').value;
+            const doctorsList = document.getElementById('doctorsList');
+            
+            if (!department) {
+                doctorsList.innerHTML = '<p>Please select a department first</p>';
+                return;
+            }
+
+            const doctors = doctorsByDepartment[department] || [];
+            doctorsList.innerHTML = doctors.map(doctor => `
+                <div class="doctor-card" onclick="selectDoctor(${doctor.id}, '${doctor.name}')">
+                    <h4>${doctor.name}</h4>
+                    <p><strong>Experience:</strong> ${doctor.experience}</p>
+                    <p><strong>Qualification:</strong> ${doctor.qualification}</p>
+                </div>
+            `).join('');
+        }
+
+        function selectDoctor(id, name) {
+            selectedDoctor = { id, name };
+            document.querySelectorAll('.doctor-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.doctor-card').classList.add('selected');
+            alert(`Selected: ${name}`);
+        }
+
+        function loadAvailableSlots() {
+            const date = document.getElementById('appointmentDate').value;
+            const slotsContainer = document.getElementById('timeSlots');
+
+            if (!date || !selectedDoctor) {
+                slotsContainer.innerHTML = '<p>Please select date and doctor first</p>';
+                return;
+            }
+
+            selectedDate = date;
+
+            const slots = [
+                '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM',
+                '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM', '04:00 PM'
+            ];
+
+            slotsContainer.innerHTML = slots.map(slot => `
+                <button type="button" class="time-slot-btn" onclick="selectTimeSlot('${slot}')">
+                    ${slot}
+                </button>
+            `).join('');
+        }
+
+        function selectTimeSlot(time) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const department = document.getElementById('department').value;
+            const symptoms = document.getElementById('symptoms').value;
+            
+            // Validate appointment booking
+            const validation = validateAppointmentBooking(
+                department,
+                selectedDoctor ? selectedDoctor.name : '',
+                selectedDate,
+                selectedTime,
+                symptoms
+            );
+            
+            if (!validation.valid) {
+                showErrorAlert('Booking Error', validation.errors);
+                return;
+            }
+
+            // Process payment of 100 rupees
+            const paymentRecord = {
+                orderId: 'ORD-' + Date.now(),
+                amount: 100,
+                currency: 'INR',
+                description: 'Hospital Appointment Booking - ' + selectedDoctor.name,
+                status: 'Completed',
+                timestamp: new Date().toLocaleString(),
+                patientEmail: localStorage.getItem('userEmail')
+            };
+
+            const appointment = {
+                doctor: selectedDoctor.name,
+                department: department,
+                date: selectedDate,
+                time: selectedTime,
+                symptoms: symptoms,
+                status: 'Confirmed',
+                bookingDate: new Date().toLocaleDateString(),
+                paymentId: paymentRecord.orderId,
+                amount: '₹100'
+            };
+
+            // Save appointment to localStorage
+            let appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
+
+            // Track payment
+            let payments = JSON.parse(localStorage.getItem('payments') || '[]');
+            payments.push(paymentRecord);
+            localStorage.setItem('payments', JSON.stringify(payments));
+
+            alert('Payment of ₹100 processed successfully!\n\nOrder ID: ' + paymentRecord.orderId + '\n\nAppointment booked successfully!');
+            document.getElementById('symptoms').value = '';
+            selectedDoctor = null;
+            selectedDate = null;
+            selectedTime = null;
+            loadAppointments();
+            showSection('my-appointments');
+        });
+
+        function loadAppointments() {
+            const appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            const appointmentsList = document.getElementById('appointmentsList');
+
+            if (appointments.length === 0) {
+                appointmentsList.innerHTML = '<p>No appointments booked yet.</p>';
+                return;
+            }
+
+            appointmentsList.innerHTML = appointments.map((apt, index) => `
+                <div class="appointment-card">
+                    <h4>Appointment ${index + 1}</h4>
+                    <p><strong>Doctor:</strong> ${apt.doctor}</p>
+                    <p><strong>Department:</strong> ${apt.department}</p>
+                    <p><strong>Date:</strong> ${apt.date}</p>
+                    <p><strong>Time:</strong> ${apt.time}</p>
+                    <p><strong>Reason:</strong> ${apt.symptoms}</p>
+                    <p><strong>Booking Fee:</strong> <span class="price">${apt.amount || '₹100'}</span></p>
+                    <p><strong>Status:</strong> <span class="status-badge">${apt.status}</span></p>
+                    ${apt.paymentId ? `<p style="font-size: 0.85rem; color: #666;"><strong>Order ID:</strong> ${apt.paymentId}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function logout() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('userName');
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            const userName = localStorage.getItem('userName') || 'Patient';
+            document.getElementById('userGreeting').textContent = `Welcome, ${userName}`;
+            document.getElementById('profileName').textContent = userName;
+            document.getElementById('profileEmail').textContent = localStorage.getItem('userEmail') || 'N/A';
+            loadAppointments();
+        });
+    </script>
+</body>
+</html>

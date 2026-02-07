@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - Hospital Appointment System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>User Login</h1>
+                    <p>Book your appointments online</p>
+                </div>
+
+                <form id="userLoginForm">
+                    <div class="form-group">
+                        <label for="userEmail">Email Address</label>
+                        <input type="email" id="userEmail" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPassword">Password</label>
+                        <input type="password" id="userPassword" name="password" required placeholder="Enter your password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="#" onclick="toggleRegister(event)">Register here</a></p>
+                    <p><a href="index.html">Back to Home</a></p>
+                </div>
+            </div>
+
+            <div class="register-box" id="registerBox" style="display: none;">
+                <div class="login-header">
+                    <h1>User Registration</h1>
+                    <p>Create your account</p>
+                </div>
+
+                <form id="userRegisterForm">
+                    <div class="form-group">
+                        <label for="userName">Full Name</label>
+                        <input type="text" id="userName" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userRegEmail">Email Address</label>
+                        <input type="email" id="userRegEmail" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPhone">Phone Number</label>
+                        <input type="tel" id="userPhone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userRegPassword">Password</label>
+                        <input type="password" id="userRegPassword" name="password" required placeholder="Create a password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+
+                <div class="form-footer">
+                    <p><a href="#" onclick="toggleRegister(event)">Back to Login</a></p>
+                    <p><a href="index.html">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleRegister(event) {
+            event.preventDefault();
+            document.querySelector('.login-box').style.display = 
+                document.querySelector('.login-box').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('registerBox').style.display = 
+                document.getElementById('registerBox').style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.getElementById('userLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            
+            // Validate form
+            const validation = validatePatientLogin(email, password);
+            if (!validation.valid) {
+                showErrorAlert('Login Error', validation.errors);
+                return;
+            }
+            
+            // Store user session
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userRole', 'patient');
+            localStorage.setItem('userName', 'Patient User');
+            
+            // Redirect to user dashboard
+            window.location.href = 'user-dashboard.html';
+        });
+
+        document.getElementById('userRegisterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userRegEmail').value;
+            const phone = document.getElementById('userPhone').value;
+            const password = document.getElementById('userRegPassword').value;
+            
+            // Validate form
+            const validation = validatePatientRegistration(name, email, phone, password);
+            if (!validation.valid) {
+                showErrorAlert('Registration Error', validation.errors);
+                return;
+            }
+            
+            // Store user data
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userRole', 'patient');
+            
+            alert('Registration successful! Logging in...');
+            window.location.href = 'user-dashboard.html';
+        });
+    </script>
+</body>
+</html>
